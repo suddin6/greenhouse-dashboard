@@ -62,112 +62,78 @@ _October 11, 2026_<br>
 ### **_3. Semantic Component & Working Tree_**
 
 ```
-body
-  header
-    div<logo>
-    nav
-      a<capabilities>
-      a<comparison>
-      a<compatibility>
-    CTA button <Deploy Free Cluster>
-  main
-    section<hero>
-        h1<title of page>
-        p<subtitle/short text> (Core Value Metrics)
-        img<>
-    section<capabilities>
-      header
-        h2<section-title>
-        p<section-subtitle>
-      div<features-grid>
-        article<feature-1>
-          h3<feature-name> (Latency Tracking)
-          p<describe feature>
-        article<feature-2>
-          h3<feature-name> (Log Aggregation)
-          p<describe feature>
-        article<feature-3>
-          h3<feature-name> (Auto-Remediation)
-          p<describe feature>
-    section<comparison>
-      header
-        h2<section-title>
-        p<section-subtitle>
-      div<tier-grid>
-        article<tier-1>
-          h3<tier-name> (Developer)
-          p<describe tier>
-          div<tier-price>
-            span<tier-values>
-          ul<tier-features>
-            li<features-list>
-          CTA Button <Deploy Developer>
-        article<tier-2>
-          div<popular-tag>
-          h3<feature-tier> (Pro Cluster)
-          p<describe tier>
-          div<tier-price>
-            span<tier-values>
-          ul<tier-features>
-            li<features-list>
-          CTA Button <Join Pro Cluster>
-        article<tier-3>
-          h3<feature-tier> (Enterprise Dedicated)
-          p<describe tier>
-          div<tier-price>
-            span<tier-values>
-          ul<tier-features>
-            li<features-list>
-          CTA Button <Become Dedicated Today>
-    section<registration>
-      div<form-wrapper>
-        header
-          h2<section-title>
-          p<section-subtitle>
-        form<registration-form>
-          div<form-group>
-            label<contact-email>
-            input<type="email" required>
-          div<form-group>
-            label<node-count>
-            input<type="number" min="" max="" step="1000" required>
-            span<constraints>
-          div<form-group>
-            label<log-throughput>
-            input<type="number" min="" max="" step="1000" required>
-            span<constraints>
-          div<form-group>
-            label<business-tier>
-            select
-              option<Developer>
-              option<Pro Cluster>
-              option<Enterprise Dedicated>
-          button<Generate API Keys>
+<body>
+  <header class="portal-header"> (CSS: flex on row, space-between, centered)
+    <div class="header-content">
+      <div class="brand">
+        <span class="brand-icon>
+        <h1>(Text: "Greenhouse Sensor Logger")<span class="brand-sub">(Text: "Dashboard")
+      <div class="header-status">(Text: "Active Queue") [STATIC]<span id="queue-count" class="badge-count"> (Text: "0") [STATIC (dynamically changed in JS)]
+  <main class="portal-container"> (CSS: grid, columns [1fr])
+    <aside class="panel form-panel">
+        <h2 class="panel-title> (Text: "Record Telemetry Readings")
+        <div id="form-error-banner" class="alert alert-danger hidden"> [DYNAMIC]
+      <form action="#" id="user-form" novalidate> (CSS: flex on column, space-between, centered) [STATIC]
+        <div class="form-group">
+          <label for="user-name" class="form-label">(Text: "Full Name:" )<span class="required">(Text: "*")
+          <input type="text" name="user-name" id="user-name" class="form-control" placeholder="Sumaya Uddin" required>
+        <div class="form-row"> (CSS: flex on row, space-between, centered)
+          <div class="form-group">
+            <label for="ph" class="form-label">(Text: "pH" )<span class="required">(Text: "*")
+            <input type="number" name="ph" id="ph" class="form-control" min="0.0" max="14.0" step="0.1" placeholder="6" required>
+          <div class="form-group">
+            <label for="ec" class="form-label">(Text: "Electrical Conductivity (mS/cm)")<span class="required">(Text: "*")
+            <input type="number" name="ec" id="ec" class="form-control" min="0.0" max="10.0" step="0.1" placeholder="1.5" required>
+        <div class="form-row"> (CSS: flex on row, space-between, centered)
+          <div class="form-group">
+            <label for="temp" class="form-label">(Text: "Air Temperature (F)")<span class="required">(Text: "*")
+            <input type="number" name="temp" id="temp" class="form-control" min="-20" max="150" step="1" placeholder="68" required>
+          <div class="form-group">
+            <label for="rh" class="form-label">(Text: "Relative Humidity (%)" )<span class="required">(Text: "*")
+            <input type="number" name="rh" id="rh" class="form-control" min="0" max="100" step="1"  placeholder="60" required>
+        <div class="form-group">
+          <label for="bay-id" class="form-label">(Text: "Bay Id" )<span class="required">(Text: "*")
+          <input type="number" name="bay-id" id="bay-id" class="form-control" min="0" max="50.0" step="1" placeholder="1" required>
+        <button type="submit" id="btn-submit" class="btn btn-primary btn-block"> (Text: "Log Sensor Inputs") (CSS: inline-flex, centered) [STATIC] (Event: type: 'submit')
+    <section class="panel records-panel">
+      <div class="records-header"> (CSS: flex on row, space-between, centered)
+        <h2 class="panel-title"> (Text: "Purge Queue")
+        <button id="btn-clear-all" class="btn btn-outline-danger btn-sm"> [STATIC] (Event: type: 'click')
+      <div id="empty-state" class="empty-state"> [STATIC]
+        <span class="empty-icon">(Emoji)
+        <p>(Text: "No active records logged.")
+      <ul id="records-list" class="record-grid" aria-live="polite"> (CSS: grid, autofill columns [1fr]) [STATIC] (Event: type: 'click')
+        <li class="record-card"> (CSS: flex on column, space-evenly, centered) [DYNAMIC]
+          <span class="status-badge staus-critical"> (Aesthetic Border) [DYNAMIC]
+          <span class="status-badge staus-optimal"> (Aesthetic Border) [DYNAMIC]
+          <span class="status-badge staus-warning"> (Aesthetic Border) [DYNAMIC]
+          <header class="card-top"> (CSS: flex on row, space-between, flex-start) [DYNAMIC]
+            <h3 class="user-name-text"> [DYNAMIC]
+            <p class="timestamp"> (Time: "24hr") [DYNAMIC]
+            <p class="telemetry-stats"> (Text: "Input Info") [DYNAMIC]
+            <span class="status-badge critical"> (Text: "Critical") [DYNAMIC]
+            <span class="status-badge optimal"> (Text: "Optimal") [DYNAMIC]
+            <span class="status-badge warning"> (Text: "Warning") [DYNAMIC]
+          <button class="btn btn-outline-danger btn-block"> (Text: "Remove Telemetry Reading") [DYNAMIC] (Event: type: 'click')
   footer
-    div<footer-container>
-      div<logo>
-      div<links>
-        a<capabilities>
-        a<comparison>
-        a<compatibility>
-        a<scroll to top> (Hero Section)
-      a<attribution>
+    <p> (Text: "&copy; Greenhouse Sensor Logger Dashboard - Sumaya Uddin")
+  <script src="app.js">
 ```
 
 ---
 
 ### **_4. Data Schema_**
 
-Write the blueprint of the JS object that will store the data for this application. The object must outline the exact keys and data types stored in memory (either front-end or back-end).
-
 ```
 const greenhouseLoggerSchema = {
     id: "String", // Unique alphanumeric identifier
-    fullName: "String", // Farmer's full name
-    lastName: "String", // Student's family name
-    dateOfBirth: "String", // date format (YYYY-MM-DD)
-    email: "String", // Academic or personal email address
-    phoneNumber: "String" // formatted contact number
+    bayId: "Number", // Specific bay input came from
+    fullName: "String", // Logger's full name
+    ph: "Number", // pH value
+    ec: "Number", // Electrical Conductivity value
+    temp: "Number", // Air Temperature value
+    rh: "Number", // Relative Humidity value
+    status: "String" // "Optimal", "Warning", "Critical"
 };
 ```
 
