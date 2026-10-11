@@ -22,40 +22,34 @@ _October 11, 2026_<br>
 #### <u>Less Than Equal 4 Click User Journey Funnel</u>:
 
 - **Starting State**:
-  - Initial viewport upon entering the Greenhouse Sensor Logger dashboard.
-  -
+  - Initial viewport upon entering the Greenhouse Sensor Logger dashboard. Input form for telemetry readings are on the left, output cards are shown on the right.
 
 - **Action 1**:
-  - User lands on the page and identifies the primary signifier: the navigation bar along with the brand logo and "Deploy Free Cluster" call-to-action [CTA] button.
-  -
+  - User lands on the page and enters appropriate information in input fields. If value is less than the min value, greater than the max value, or the input field is blank, the form cannot be submitted and no output card is produced.
 
 - **Action 2**:
-  - User scrolls down or clicks on navigation link to reach the three hosting tiers.
-  -
+  - User clicks the submit button on the form and an output card is produced onto the dashboard on the right-hand side. All output cards are stored in a local storage.
 
 - **Action 3**:
-  - User inspects the tiered cards where the "Pro Cluster" card is visually elevated (badge signifier).
-  -
+  - UI state will dynamically update the count on the "Active Queue: " and show all the inputted information in a condensed manner with appropriate badges for ease of readability.
 
 - **Action 4**:
-  - User submits log throughput and node count requirements into a number input field and clicks the primary registration CTA (Generate API Keys).
-  -
+  - Users can purge the entire queue or delete a specific output card by clicking the appropriate buttons.
 
 - **Terminal State**:
-  - Visual confirmation upon submission of form.
-  -
+  - Zero output cards in the dashboard with the "Active Queue: " counter turning back to 0 and the static HTML elements displayed on the screen. Purging queue will clear the entries from both the DOM and the local storage.
 
 ---
 
 ### **_2. Don Norman Usability & Constraint Audit_**
 
-| Norman Principle      | System Context                                                                 | Using Concrete Implementation Mechanism (DOM / HTML / JS) |
-| :-------------------- | :----------------------------------------------------------------------------- | :-------------------------------------------------------- |
-| Gulf of Execution     | Typing numeric sensor metrics (pH, ElectricalConductivity[EC], Temp, Humidity) |                                                           |
-| Gulf of Evaluation    | Ingesting sensor values after clicking "Record Reading"                        |                                                           |
-| System Constraint     | E.g. Water pH Boundaries (0.0 <= pH <= 14.0)                                   |                                                           |
-| Visual Feedback State | Real-Time Input Error / Out-of-Bounds                                          |                                                           |
-| Error Recovery        | Accidental or test data submissions                                            |                                                           |
+| Norman Principle      | System Context                                                                 | Using Concrete Implementation Mechanism (DOM / HTML / JS)                                                                                                                                                                                                                    |
+| :-------------------- | :----------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Gulf of Execution     | Typing numeric sensor metrics (pH, ElectricalConductivity[EC], Temp, Humidity) | The `<label>` elements state the unit of measure (mS/cm, %, and °F) and the `placeholder` attributes ("6.0", "1.5", etc.) indicate the expected formats.                                                                                                                     |
+| Gulf of Evaluation    | Ingesting sensor values after clicking "Record Reading"                        | The system communicates the severity of the input through dynamic risk badges (`.status-badge`) on the output card that explicitly label the state (`Optimal, Critical Hazard, Warning`) with distinct colors (green, red, yellow).                                          |
+| System Constraint     | E.g. Water pH Boundaries (0.0 <= pH <= 14.0)                                   | HTML input attributes (`min="0.0" max="14.0" step="0.1" required`) constrain the entry bounds to ensure that only valid inputs can be submitted.                                                                                                                             |
+| Visual Feedback State | Real-Time Input Error / Out-of-Bounds                                          | JavaScript event listeners evalute user input and toggle CSS error classes ("`.alert alert-danger hidden`") with the role of `alert ` to inform the user that their input was out-of-bound.                                                                                  |
+| Error Recovery        | Accidental or test data                                                        | The "`Remove Telemetry Reading`" button is on the output card and used to clear specific bad or accidental records in the active queue without clearing all inputs. The `Purge Queue` buttons is used to remove all entries in the dashboard from `DOM` and `local storage`. |
 
 ---
 
@@ -86,7 +80,7 @@ _October 11, 2026_<br>
             <input type="number" name="ec" id="ec" class="form-control" min="0.0" max="10.0" step="0.1" placeholder="1.5" required>
         <div class="form-row"> (CSS: flex on row, space-between, centered)
           <div class="form-group">
-            <label for="temp" class="form-label">(Text: "Air Temperature (F)")<span class="required">(Text: "*")
+            <label for="temp" class="form-label">(Text: "Air Temperature (°F)")<span class="required">(Text: "*")
             <input type="number" name="temp" id="temp" class="form-control" min="-20" max="150" step="1" placeholder="68" required>
           <div class="form-group">
             <label for="rh" class="form-label">(Text: "Relative Humidity (%)" )<span class="required">(Text: "*")
@@ -111,7 +105,7 @@ _October 11, 2026_<br>
             <h3 class="user-name-text"> [DYNAMIC]
             <p class="timestamp"> (Time: "24hr") [DYNAMIC]
             <p class="telemetry-stats"> (Text: "Input Info") [DYNAMIC]
-            <span class="status-badge critical"> (Text: "Critical") [DYNAMIC]
+            <span class="status-badge critical"> (Text: "Critical Hazard") [DYNAMIC]
             <span class="status-badge optimal"> (Text: "Optimal") [DYNAMIC]
             <span class="status-badge warning"> (Text: "Warning") [DYNAMIC]
           <button class="btn btn-outline-danger btn-block"> (Text: "Remove Telemetry Reading") [DYNAMIC] (Event: type: 'click')
@@ -133,7 +127,7 @@ const greenhouseLoggerSchema = {
     ec: "Number", // Electrical Conductivity value
     temp: "Number", // Air Temperature value
     rh: "Number", // Relative Humidity value
-    status: "String" // "Optimal", "Warning", "Critical"
+    status: "String" // "Optimal", "Warning", "Critical Hazard"
 };
 ```
 
