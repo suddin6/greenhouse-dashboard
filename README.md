@@ -91,8 +91,8 @@ _October 11, 2026_<br>
         <button type="submit" id="btn-submit" class="btn btn-primary btn-block"> (Text: "Log Sensor Inputs") (CSS: inline-flex, centered) [STATIC] (Event: type: 'submit')
     <section class="panel records-panel">
       <div class="records-header"> (CSS: flex on row, space-between, centered)
-        <h2 class="panel-title"> (Text: "Purge Queue")
-        <button id="btn-clear-all" class="btn btn-outline-danger btn-sm"> [STATIC] (Event: type: 'click')
+        <h2 class="panel-title"> (Text: "Sensor Records")
+        <button id="btn-clear-all" class="btn btn-outline-danger btn-sm"> (Text: "Purge Queue") [STATIC] (Event: type: 'click')
       <div id="empty-state" class="empty-state"> [STATIC]
         <span class="empty-icon">(Emoji)
         <p>(Text: "No active records logged.")
