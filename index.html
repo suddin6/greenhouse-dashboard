@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Greenhouse Sensor Logger | Agriculture Dashboard</title>
     <!-- Link to CSS file -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="images/favicon.png" />
   </head>
 
   <!-- Custom Body Code -->
@@ -14,12 +15,19 @@
     <!-- Header Section -->
     <header class="portal-header">
       <div class="header-content">
-        <span class="brand-icon"> </span>
-        <h1 class="brand-title">Greenhouse Sensor Logger</h1>
-        <span class="brand-subtitle">Dashboard</span>
+        <div class="brand">
+          <span class="brand-icon">
+            <img src="images/favicon.png" alt="Favicon" />
+          </span>
+          <h1 class="brand-title">
+            Greenhouse Sensor Logger
+            <span class="brand-subtitle">Dashboard</span>
+          </h1>
+        </div>
+        <div class="header-status">
+          Active Queue: <span id="queue-count" class="badge-count">0</span>
+        </div>
       </div>
-      <div class="header-status">Active Queue:</div>
-      <span id="queue-count" class="badge-count">0</span>
     </header>
 
     <!-- Main Section -->
@@ -163,6 +171,11 @@
     <!-- Footer Section -->
     <footer>
       <p>&copy; Greenhouse Sensor Logger Dashboard - Sumaya Uddin</p>
+      <a
+        href="https://www.flaticon.com/free-icons/agriculture"
+        title="agriculture icons"
+        >Agriculture icons created by RanuKumbolo.lab - Flaticon</a
+      >
     </footer>
     <!-- Connection to JS file -->
     <script src="script.js"></script>
