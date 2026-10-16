@@ -15,15 +15,17 @@
     <!-- Header Section -->
     <header class="portal-header">
       <div class="header-content">
-        <div class="brand">
-          <span class="brand-icon">
-            <img src="images/favicon.png" alt="Favicon" />
-          </span>
-          <h1 class="brand-title">
-            Greenhouse Sensor Logger
-            <span class="brand-subtitle">Dashboard</span>
-          </h1>
-        </div>
+        <a href="#">
+          <div class="brand">
+            <span class="brand-icon">
+              <img src="images/favicon.png" alt="Favicon" />
+            </span>
+            <h1 class="brand-title">
+              Greenhouse Sensor Logger
+              <span class="brand-subtitle">Dashboard</span>
+            </h1>
+          </div>
+        </a>
         <div class="header-status">
           Active Queue: <span id="queue-count" class="badge-count">0</span>
         </div>
@@ -161,19 +163,20 @@
           </button>
         </div>
         <div id="empty-state" class="empty-state">
-          <span class="empty-icon"></span>
+          <span class="empty-icon">📝</span>
           <p>No sensor records have been logged yet.</p>
         </div>
-        <ul id="records-list" class="record-grid" aria-live="polite"></ul>
+        <ul id="records-list" class="records-grid" aria-live="polite"></ul>
       </section>
     </main>
 
     <!-- Footer Section -->
-    <footer>
+    <footer class="portal-footer">
       <p>&copy; Greenhouse Sensor Logger Dashboard - Sumaya Uddin</p>
       <a
         href="https://www.flaticon.com/free-icons/agriculture"
-        title="agriculture icons"
+        title="Agriculture Icons"
+        class="attribute"
         >Agriculture icons created by RanuKumbolo.lab - Flaticon</a
       >
     </footer>
