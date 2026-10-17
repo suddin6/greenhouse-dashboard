@@ -97,18 +97,15 @@ _October 11, 2026_<br>
         <span class="empty-icon">(Emoji)
         <p>(Text: "No active records logged.")
       <ul id="records-list" class="record-grid" aria-live="polite"> (CSS: grid, autofill columns [1fr]) [STATIC] (Event: type: 'click')
-        <li class="record-card"> (CSS: flex on column, space-evenly, centered) [DYNAMIC]
-          <span class="status-badge staus-critical"> (Aesthetic Border) [DYNAMIC]
-          <span class="status-badge staus-optimal"> (Aesthetic Border) [DYNAMIC]
-          <span class="status-badge staus-warning"> (Aesthetic Border) [DYNAMIC]
-          <header class="card-top"> (CSS: flex on row, space-between, flex-start) [DYNAMIC]
-            <h3 class="user-name-text"> [DYNAMIC]
-            <p class="timestamp"> (Time: "24hr") [DYNAMIC]
-            <p class="telemetry-stats"> (Text: "Input Info") [DYNAMIC]
-            <span class="status-badge critical"> (Text: "Critical Hazard") [DYNAMIC]
-            <span class="status-badge optimal"> (Text: "Optimal") [DYNAMIC]
-            <span class="status-badge warning"> (Text: "Warning") [DYNAMIC]
-          <button class="btn btn-outline-danger btn-block"> (Text: "Remove Telemetry Reading") [DYNAMIC] (Event: type: 'click')
+        <div class="card-top"> (CSS: flex on column, space-evenly, centered) [DYNAMIC]
+          <div> (CSS: flex on row, space-between, flex-start) [DYNAMIC]
+            <div class="user-name-text"> [DYNAMIC]
+            <div lass="timestamp"> [DYNAMIC]
+            <div class="telemetry-stats"> (Text: "Input Info") [DYNAMIC]
+            <span class="risk-badge critical"> (Text: "Critical Hazard") [DYNAMIC]
+            <span class="risk-badge optimal"> (Text: "Optimal") [DYNAMIC]
+            <span class="risk-badge warning"> (Text: "Warning") [DYNAMIC]
+          <button class="btn btn-outline-danger btn-block"> (Text: "Remove Reading") [DYNAMIC] (Event: type: 'click')
   footer
     <p> (Text: "&copy; Greenhouse Sensor Logger Dashboard - Sumaya Uddin")
   <script src="app.js">
@@ -127,7 +124,6 @@ const greenhouseLoggerSchema = {
     ec: "Number", // Electrical Conductivity value
     temp: "Number", // Air Temperature value
     rh: "Number", // Relative Humidity value
-    status: "String" // "Optimal", "Warning", "Critical Hazard"
 };
 ```
 

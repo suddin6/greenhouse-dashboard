@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: "Plus-Jakarta-Sans-Subtitle";
-  src: url(fonts/Plus-Jakarta-Sans-SemiBold.ttf);
+  src: url(fonts/PlusJakartaSans-SemiBold.ttf);
   font-weight: 500;
 }
 
@@ -210,6 +210,8 @@ body {
     background-color var(--transition-speed),
     border-color var(--transition-speed),
     color var(--transition-speed);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .btn-primary {
@@ -284,8 +286,12 @@ body {
 .records-grid {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1rem;
+
+  max-height: 20rem;
+  overflow-y: auto;
+  padding-right: 0.75rem;
 }
 
 .user-card {
@@ -329,24 +335,26 @@ body {
 }
 
 .risk-badge {
-  font-family: var(--text);
+  font-family: var(--subtitle);
   font-size: 0.75rem;
   padding: 0.25rem 0.5rem;
   border-radius: 9999px;
   text-transform: uppercase;
+  display: inline-block;
+  white-space: nowrap;
 }
 
-.risk-badge-critical {
+.risk-badge.critical {
   background-color: var(--critical);
   color: #fff;
 }
 
-.risk-badge-warning {
+.risk-badge.warning {
   background-color: var(--warning);
   color: #fff;
 }
 
-.risk-badge-optimal {
+.risk-badge.optimal {
   background-color: var(--optimal);
   color: #fff;
 }
